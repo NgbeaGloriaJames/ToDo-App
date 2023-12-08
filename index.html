@@ -7,13 +7,48 @@
     <script src="https://kit.fontawesome.com/96bf4d1529.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        
         /* Mobile Screens */
         @media screen and (max-width: 767px) {
+            body {
+                background-color: rgb(23, 117, 148);
+            }
+    
+            #app {
+                width: 100%;
+                background-color: white;
+                border: rgb(23, 117, 148) solid 2px;
+                border-radius: 15px;
+                margin-top: 10px;
+            }
+    
+            .input-item {
+                border: grey 0.5px solid;
+                height: 50px;
+                width: 90%; /* Adjusted width for better responsiveness */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: whitesmoke;
+                border-radius: 10px;
+                margin: -15px auto;
+                margin-bottom: 5px;
+            }
+    
+            .list-items {
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+                height: auto; /* Adjusted height to allow content to dictate height */
+                align-items: center;
+                padding: 5px;
+                max-width: 100%; /* Adjusted max-width for better responsiveness */
+                width: 90%; /* Adjusted width for better responsiveness */
+                margin: 10px auto -3px;
+            }
+        }
+        /* large screen */
+        @media screen and (min-width: 767px) {
             body {
                 background-color: rgb(23, 117, 148);
             }
