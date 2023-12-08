@@ -22,10 +22,7 @@ const app = Vue.createApp({
                     }
                 },
                 deleteTodo(index) {
-                    const confirmDelete = confirm('Are you sure you want to delete this ToDo?');
-                    if (confirmDelete) {
                         this.todos.splice(index, 1);
-                    }
                 },
         }
         
