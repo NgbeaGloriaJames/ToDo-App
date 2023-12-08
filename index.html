@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <script src="https://kit.fontawesome.com/96bf4d1529.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body style='background-color: rebeccapurple;
+margin: 0;
+display: flex;
+justify-content: center;
+height: 100vh;'>
+    <div id="app" style="max-width: 1440px; text-align: center;">
+        <h2 style="color:rgb(229, 236, 236); font-size: 40px;">
+            ToDo App
+        </h2>
+        
+        <input type="text" name="" id="" placeholder="Enter New ToDo...."
+         v-model = 'todoContent' style="background-color: #4B0082; color: white; border: none; height: 35px; outline: none;" />
+        <button type="submit" @click.prevent="addTodo" style="height: 35px; border: none;"> Add ToDo</button>
+        
+        <div class="list-action-btn">
+        <ol class="todo-list" style="list-style-type: none; padding: 0; text-align: center;">
+            <li class="list-items" v-for = '(todo, index) in todos' :key="index" style="display: flex; justify-content: space-between; text-align: center; margin-bottom:2px; background-color: #FFD700; height: 30px; align-items: center;">
+                {{todo.todoContent}}
+                <div class="actionbtn" style="display: inline; position: relative; left: -2%; display: flex; gap: 15px;">
+                    <button @click="editTodo(index)" style="background: none; border: none; padding: 0;">
+                        <i class="fas fa-pen-to-square" style="color: #00000;"></i>
+                    </button>
+                    <button @click="deleteTodo(index)" style="background: none; border: none; padding: 0;">
+                        <i class="fas fa-trash" style="color: #00000;"></i>
+                    </button>
+                </div>
+            </li>
+        </ol>
+    </div>
+
+    </div>
+
+    <!-- Import App -->
+    <script src="./main.js"></script>
+
+    <!-- Mount App -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+</html>
