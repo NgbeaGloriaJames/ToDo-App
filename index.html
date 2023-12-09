@@ -2,102 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>ToDo App</title>
     <script src="https://kit.fontawesome.com/96bf4d1529.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-        
-        /* Mobile Screens */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            background-color: rgb(23, 117, 148);
+        }
+
+        #app {
+            width: 100%;
+            background-color: white;
+            border: rgb(23, 117, 148) solid 2px;
+            border-radius: 15px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        input {
+            background-color: white;
+            color: black;
+            border: solid 0.5px grey;
+            height: 35px;
+            border-radius: 5px 0 0 5px;
+            width: 60%;
+            max-width: 300px;
+        }
+
+        button {
+            height: 39px;
+            border: 0.5px solid green;
+            background-color: green;
+            border-radius: 0 5px 5px 0;
+            color: white;
+        }
+
+        .list-items {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            height: auto;
+            align-items: center;
+            padding: 5px;
+            max-width: 100%;
+            width: 90%;
+            margin: 10px auto -3px;
+        }
+
         @media screen and (max-width: 767px) {
-            body {
-                background-color: rgb(23, 117, 148);
+            input {
+                width: 90%;
             }
-    
-            #app {
-                width: 100%;
-                background-color: white;
-                border: rgb(23, 117, 148) solid 2px;
-                border-radius: 15px;
-                margin-top: 10px;
-            }
-    
-            .input-item {
-                border: grey 0.5px solid;
-                height: 50px;
-                width: 90%; /* Adjusted width for better responsiveness */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: whitesmoke;
-                border-radius: 10px;
-                margin: -15px auto;
-                margin-bottom: 5px;
-            }
-    
+
             .list-items {
-                display: flex;
-                justify-content: space-between;
-                text-align: center;
-                height: auto; /* Adjusted height to allow content to dictate height */
-                align-items: center;
-                padding: 5px;
-                max-width: 100%; /* Adjusted max-width for better responsiveness */
-                width: 90%; /* Adjusted width for better responsiveness */
-                margin: 10px auto -3px;
+                max-width: 767px;
+                width: 95%;
             }
         }
-        /* large screen */
+
         @media screen and (min-width: 767px) {
-            body {
-                background-color: rgb(23, 117, 148);
+            input {
+                width: 90%;
             }
-    
-            #app {
-                width: 100%;
-                background-color: white;
-                border: rgb(23, 117, 148) solid 2px;
-                border-radius: 15px;
-                margin-top: 10px;
-            }
-    
-            .input-item {
-                border: grey 0.5px solid;
-                height: 50px;
-                width: 90%; /* Adjusted width for better responsiveness */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: whitesmoke;
-                border-radius: 10px;
-                margin: -15px auto;
-                margin-bottom: 5px;
-            }
-    
+
             .list-items {
-                display: flex;
-                justify-content: space-between;
-                text-align: center;
-                height: auto; /* Adjusted height to allow content to dictate height */
-                align-items: center;
-                padding: 5px;
-                max-width: 100%; /* Adjusted max-width for better responsiveness */
-                width: 90%; /* Adjusted width for better responsiveness */
-                margin: 10px auto -3px;
+                max-width: 767px;
+                width: 95%;
             }
         }
     </style>
 </head>
-<body style="margin: 0; display: flex; justify-content: center; height: 100vh;">
-    <div id="app" style="text-align: center;">
-        <h2 style="color:black; font-size: 40px;">
-            ToDo App
-        </h2>
-        <div class="input-item">
-            <input type="text" name="" id="" placeholder="Enter New ToDo...." v-model='todoContent' style="background-color:white; color:black; border: solid 0.5px grey; height: 35px; border-radius: 5px 0 0 5px; width: 60% ; box-sizing: border-box;" />
-            <button type="submit" @click.prevent="addTodo" style="height: 39px; border:0.5px solid green; background-color: green; border-radius: 0 5px 5px 0; color: white;"> Add ToDo</button>
-        </div>
-        
+<body>
+    <div id="app">
+        <h2 style="color: black; font-size: 40px;">ToDo App</h2>
+        <input type="text" placeholder="Enter New ToDo...." v-model='todoContent' />
+        <button type="submit" @click.prevent="addTodo">Add ToDo</button>
+
         <div class="list-action-btn">
             <ol class="todo-list" style="list-style-type: none; padding: 0; text-align: center;">
                 <li class="list-items" v-for="(todo, index) in todos" :key="index" :style="{ backgroundColor: todo.completed ? 'green' : '#FFD700' }" style="display: flex; justify-content: space-between; text-align: center; height: 30px; align-items: center; padding: 5px; max-width: 767px; width: 95%; margin: 10px auto -3px;">
@@ -117,8 +102,6 @@
             </ol>
         </div>
     </div>
-
-
 
     <!-- Import App -->
     <script src="./main.js"></script>
