@@ -2,118 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>ToDo App</title>
-    <script src="https://kit.fontawesome.com/96bf4d1529.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue ToDo App</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            height: 100vh;
-            background-color: rgb(23, 117, 148);
+            padding: 0;
         }
 
         #app {
-            width: 90%;
-            background-color: white;
-            border: rgb(23, 117, 148) solid 2px;
-            border-radius: 15px;
-            margin-top: 10px;
-            text-align: center;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
-        input {
-            background-color: white;
-            color: black;
-            border: solid 0.5px grey;
-            height: 35px;
-            border-radius: 5px ;
-            max-width: 300px;
-            width: 60%;
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
         }
 
         button {
-            height: 39px;
-            border: 0.5px solid green;
-            background-color: green;
-            border-radius: 5px ;
-            color: white;
-            margin-left: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        .list-items {
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             display: flex;
             justify-content: space-between;
-            text-align: center;
-            height: auto;
             align-items: center;
-            padding: 5px;
-            max-width: 100%;
-            width: 90%;
-            margin: 10px auto -3px;
         }
 
-        @media screen and (max-width: 767px) {
-            input {
-                width: 90%;
-            }
-
-            .list-items {
-                max-width: 767px;
-                width: 95%;
-            }
-            .add{
-                margin-block-start: 5px;
-
-            }
+        input[type="checkbox"] {
+            margin-right: 10px;
         }
 
-        @media screen and (min-width: 767px) {
-            input {
-                width: 90%;
-            }
+        .text-decoration-line-through {
+            text-decoration: line-through;
+        }
 
-            .list-items {
-                max-width: 767px;
-                width: 95%;
-            }
+        .btn-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        <h2 style="color: black; font-size: 40px;">ToDo App</h2>
-        <input type="text" placeholder="Enter New ToDo...." v-model='todoContent' />
-        <button class="add" type="submit" @click.prevent="addTodo">Add ToDo</button>
 
-        <div class="list-action-btn">
-            <ol class="todo-list" style="list-style-type: none; padding: 0; text-align: center;">
-                <li class="list-items" v-for="(todo, index) in todos" :key="index" :style="{ backgroundColor: todo.completed ? 'green' : '#FFD700' }" style="display: flex; justify-content: space-between; text-align: center; height: 30px; align-items: center; padding: 5px; max-width: 767px; width: 95%; margin: 10px auto -3px;">
-                    {{todo.todoContent}}
-                    <div class="actionbtn" style="display: inline; position: relative; left: -2%; display: flex; gap: 15px;">
-                        <button @click="editTodo(index)" style="background: none; border: none; padding: 0;">
-                            <i class="fas fa-pencil-alt" style="color: #00000;"></i>
-                        </button>
-                        <button @click="deleteTodo(index)" style="background: none; border: none; padding: 0;">
-                            <i class="fas fa-trash" style="color: #00000;"></i>
-                        </button>
-                        <button @click="toggleDone(index)" style="background: none; border: none; padding: 0;">
-                            <i class="fas fa-check" style="color: #00000;"></i>
-                        </button>
-                    </div>
-                </li>
-            </ol>
-        </div>
+<div id="app">
+    <h1>Vue ToDo App</h1>
+    <div class="input-group">
+        <input type="text" v-model="newTask" @keyup.enter="addTask" placeholder="Add a new task">
+        <button @click="addTask" class="btn btn-primary">Add</button>
     </div>
+    <ul>
+        <li v-for="(task, index) in tasks" :key="index">
+            <div>
+                <input type="checkbox" v-model="task.done">
+                <span :class="{ 'text-decoration-line-through': task.done }">{{ task.text }}</span>
+            </div>
+            <div>
+                <button @click="editTask(index)" class="btn btn-warning">Edit</button>
+                <button @click="deleteTask(index)" class="btn btn-danger">Delete</button>
+            </div>
+        </li>
+    </ul>
+</div>
 
-    <!-- Import App -->
-    <script src="./main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
-    <!-- Mount App -->
-    <script>
-        const mountedApp = app.mount('#app')
-    </script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            newTask: '',
+            tasks: []
+        },
+        methods: {
+            addTask() {
+                if (this.newTask.trim() !== '') {
+                    this.tasks.push({ text: this.newTask, done: false });
+                    this.newTask = '';
+                }
+            },
+            editTask(index) {
+                const newText = prompt('Edit task:', this.tasks[index].text);
+                if (newText !== null) {
+                    this.$set(this.tasks, index, { text: newText, done: this.tasks[index].done });
+                }
+            },
+            deleteTask(index) {
+                if (confirm('Are you sure you want to delete this task?')) {
+                    this.tasks.splice(index, 1);
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
