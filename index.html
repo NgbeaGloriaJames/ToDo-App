@@ -16,7 +16,7 @@
         }
 
         #app {
-            width: 100%;
+            width: 90%;
             background-color: white;
             border: rgb(23, 117, 148) solid 2px;
             border-radius: 15px;
@@ -29,17 +29,18 @@
             color: black;
             border: solid 0.5px grey;
             height: 35px;
-            border-radius: 5px 0 0 5px;
-            width: 60%;
+            border-radius: 5px ;
             max-width: 300px;
+            width: 60%;
         }
 
         button {
             height: 39px;
             border: 0.5px solid green;
             background-color: green;
-            border-radius: 0 5px 5px 0;
+            border-radius: 5px ;
             color: white;
+            margin-left: 10px;
         }
 
         .list-items {
@@ -63,6 +64,10 @@
                 max-width: 767px;
                 width: 95%;
             }
+            .add{
+                margin-block-start: 5px;
+
+            }
         }
 
         @media screen and (min-width: 767px) {
@@ -81,7 +86,7 @@
     <div id="app">
         <h2 style="color: black; font-size: 40px;">ToDo App</h2>
         <input type="text" placeholder="Enter New ToDo...." v-model='todoContent' />
-        <button type="submit" @click.prevent="addTodo">Add ToDo</button>
+        <button class="add" type="submit" @click.prevent="addTodo">Add ToDo</button>
 
         <div class="list-action-btn">
             <ol class="todo-list" style="list-style-type: none; padding: 0; text-align: center;">
