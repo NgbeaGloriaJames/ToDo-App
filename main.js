@@ -34,13 +34,19 @@ const app = Vue.createApp({
         deleteTodo(index) {
             this.todos.splice(index, 1);
 
-            //   storage
+            // Update local storage
             localStorage.setItem('todos', JSON.stringify(this.todos));
         },
         toggleDone(index) {
             this.todos[index].completed = !this.todos[index].completed;
 
-            //   storage
+            // Update local storage
+            localStorage.setItem('todos', JSON.stringify(this.todos));
+        },
+        clearTodos() {
+            this.todos = [];
+
+            // Update local storage
             localStorage.setItem('todos', JSON.stringify(this.todos));
         },
     },
@@ -49,4 +55,3 @@ const app = Vue.createApp({
         this.todos = JSON.parse(localStorage.getItem('todos')) || [];
     },
 });
-
